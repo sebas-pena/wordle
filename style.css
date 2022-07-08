@@ -1,5 +1,5 @@
 :root{
-  --gray: #878a8c;
+  --gray: #d3d6da;
   --light-gray: #d3d6da;
 }
 
@@ -30,7 +30,7 @@ td.cell {
 }
 
 .cell.empty{
-  border-color: var(--gray);
+  border-color: var(--light-gray);
 }
 
 .keyboard{
@@ -52,7 +52,7 @@ td.cell {
   padding: 17px 16px;
   border-radius: 5px;
   border: none;
-  background-color: var(--light-gray);
+  background-color: var(--gray);
   font-size: 14px;
   font-weight: 600;
 }
