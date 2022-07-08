@@ -1,6 +1,9 @@
 :root{
   --gray: #d3d6da;
   --light-gray: #d3d6da;
+  --dark-gray:#787c7e;
+  --yellow : #c9b458;
+  --green:#6aaa64
 }
 
 *{
