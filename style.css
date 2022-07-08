@@ -30,6 +30,7 @@ td.cell {
   text-align: center;
   font-size: 30px;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 .cell.empty{
