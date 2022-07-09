@@ -2,6 +2,7 @@
   --gray: #d3d6da;
   --light-gray: #d3d6da;
   --dark-gray:#787c7e;
+  --dark-gray2: #878a8c;
   --yellow : #c9b458;
   --green:#6aaa64
 }
@@ -33,8 +34,23 @@ td.cell {
   text-transform: uppercase;
 }
 
-.cell.empty{
+.cell[status="active"]{
+  border-color: var(--dark-gray2);
+  animation: jump .3s ease-in-out;
+}
+
+.cell[status="empty"]{
   border-color: var(--light-gray);
+}
+
+.cell[status="correct"]{
+  animation: flip 1.3s ease-out forwards, correct-style 1.3s ease-out forwards;
+}
+.cell[status="clue"]{
+  animation: flip 1.3s ease-out forwards, clue-style 1.3s ease-out forwards;
+}
+.cell[status="wrong"]{
+  animation: flip 1.3s ease-out forwards, wrong-style 1.3s ease-out forwards;
 }
 
 .keyboard{
@@ -59,4 +75,77 @@ td.cell {
   background-color: var(--gray);
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
+}
+
+.key[status="correct"]{
+  background-color: var(--green);
+}
+.key[status="clue"]{
+  background-color: var(--yellow);
+}
+.key[status="wrong"]{
+  background-color: var(--dark-gray);
+}
+
+@keyframes jump {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+  
+}
+@keyframes flip {
+  50% {
+    transform: rotate3d( 1, 0, 0, 90deg);
+    color: #000;
+  }
+  51% {
+    color: #fff
+
+  }
+  100% {
+    transform: rotate3d( 1, 0, 0, 0);
+    color: #fff
+
+  }
+}
+
+@keyframes correct-style{
+  0%{}
+  50%{
+    border-color: var(--dark-gray2);
+    background-color: #fff;
+  }
+  100%{
+    border-color: var(--green);
+    background-color: var(--green);
+  }
+}
+@keyframes clue-style{
+  0%{}
+  50%{
+    border-color: var(--dark-gray2);
+    background-color: #fff;
+  }
+  100%{
+    border-color: var(--yellow);
+    background-color: var(--yellow);
+  }
+}
+@keyframes wrong-style{
+  0%{}
+  50%{
+    border-color: var(--dark-gray2);
+    background-color: #fff;
+  }
+  100%{
+    border-color: var(--dark-gray);
+    background-color: var(--dark-gray);
+  }
 }

@@ -5,7 +5,6 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="./style.css" />
-		<script src="./script.js" defer></script>
 		<title>Wordle</title>
 	</head>
 	<body>
@@ -13,84 +12,86 @@
 
 		<table class="board">
 			<tr>
-				<td class="cell">A</td>
-				<td class="cell">B</td>
-				<td class="cell">C</td>
-				<td class="cell">D</td>
-				<td class="cell">E</td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
 			</tr>
 			<tr>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
 			</tr>
 			<tr>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
 			</tr>
 			<tr>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
 			</tr>
 			<tr>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
 			</tr>
 			<tr>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
-				<td class="cell empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
+				<td class="cell" status="empty"></td>
 			</tr>
 		</table>
 
 		<div class="keyboard">
 			<div>
-				<button class="key">Q</button>
-				<button class="key">W</button>
-				<button class="key">E</button>
-				<button class="key">R</button>
-				<button class="key">T</button>
-				<button class="key">Y</button>
-				<button class="key">U</button>
-				<button class="key">I</button>
-				<button class="key">O</button>
-				<button class="key">P</button>
+				<button class="key letter">Q</button>
+				<button class="key letter">W</button>
+				<button class="key letter">E</button>
+				<button class="key letter">R</button>
+				<button class="key letter">T</button>
+				<button class="key letter">Y</button>
+				<button class="key letter">U</button>
+				<button class="key letter">I</button>
+				<button class="key letter">O</button>
+				<button class="key letter">P</button>
 			</div>
 			<div>
-				<button class="key">A</button>
-				<button class="key">S</button>
-				<button class="key">D</button>
-				<button class="key">F</button>
-				<button class="key">G</button>
-				<button class="key">H</button>
-				<button class="key">J</button>
-				<button class="key">K</button>
-				<button class="key">L</button>
+				<button class="key letter">A</button>
+				<button class="key letter">S</button>
+				<button class="key letter">D</button>
+				<button class="key letter">F</button>
+				<button class="key letter">G</button>
+				<button class="key letter">H</button>
+				<button class="key letter">J</button>
+				<button class="key letter">K</button>
+				<button class="key letter">L</button>
 			</div>
 			<div>
-				<button class="key">ENTER</button>
-				<button class="key">Z</button>
-				<button class="key">X</button>
-				<button class="key">C</button>
-				<button class="key">V</button>
-				<button class="key">B</button>
-				<button class="key">N</button>
-				<button class="key">M</button>
-				<button class="key">DEL</button>
+				<button class="key enter">ENTER</button>
+				<button class="key letter">Z</button>
+				<button class="key letter">X</button>
+				<button class="key letter">C</button>
+				<button class="key letter">V</button>
+				<button class="key letter">B</button>
+				<button class="key letter">N</button>
+				<button class="key letter">M</button>
+				<button class="key del">DEL</button>
 			</div>
 		</div>
+		<script src="./words.js"></script>
+		<script src="./script.js"></script>
 	</body>
 </html>
