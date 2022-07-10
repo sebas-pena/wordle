@@ -15,6 +15,7 @@
 }
 
 body{
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -34,6 +35,9 @@ td.cell {
   text-transform: uppercase;
 }
 
+tr.shake{
+  animation: shake .5s ease-in-out;
+}
 .cell[status="active"]{
   border-color: var(--dark-gray2);
   animation: jump .3s ease-in-out;
@@ -46,8 +50,8 @@ td.cell {
 .cell[status="correct"]{
   animation: flip 1.3s ease-out forwards, correct-style 1.3s ease-out forwards;
 }
-.cell[status="clue"]{
-  animation: flip 1.3s ease-out forwards, clue-style 1.3s ease-out forwards;
+.cell[status="close"]{
+  animation: flip 1.3s ease-out forwards, close-style 1.3s ease-out forwards;
 }
 .cell[status="wrong"]{
   animation: flip 1.3s ease-out forwards, wrong-style 1.3s ease-out forwards;
@@ -81,12 +85,66 @@ td.cell {
 .key[status="correct"]{
   background-color: var(--green);
 }
-.key[status="clue"]{
+.key[status="close"]{
   background-color: var(--yellow);
 }
 .key[status="wrong"]{
   background-color: var(--dark-gray);
 }
+
+#modal{
+  display: none;
+}
+#modal.open{
+  position: absolute;
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(16, 16, 16, 0.589);
+}
+
+#modal.open > div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 10px;
+
+}
+
+#modal > div > h2 {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+#modal > div > p {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.modal__button{
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--gray);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+
+.modal__button:hover{
+  background-color: #c7c8c8;
+}
+
+
 
 @keyframes jump {
   0% {
@@ -127,7 +185,7 @@ td.cell {
     background-color: var(--green);
   }
 }
-@keyframes clue-style{
+@keyframes close-style{
   0%{}
   50%{
     border-color: var(--dark-gray2);
@@ -147,5 +205,23 @@ td.cell {
   100%{
     border-color: var(--dark-gray);
     background-color: var(--dark-gray);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0);
+  }
+  25%{
+    transform: translate(10px);
+  }
+  50% {
+    transform: translate(-10px);
+  }
+  75%{
+    transform: translate(10px);
+  }
+  100% {
+    transform: translate(0);
   }
 }

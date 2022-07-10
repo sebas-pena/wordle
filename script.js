@@ -3,7 +3,7 @@
 	const keyboardKeys = document.querySelectorAll(".key.letter")
 	const keyboardEnter = document.querySelector(".key.enter")
 	const keyboardDel = document.querySelector(".key.del")
-	let gameStatus = "playing"
+	const modal = document.getElementById("modal")
 	const keysPositions = {
 		q: 0,
 		w: 1,
@@ -25,50 +25,113 @@
 		j: 16,
 		k: 17,
 		l: 18,
+		ñ: 19,
 		// first line
-		z: 19,
-		x: 20,
-		c: 21,
-		v: 22,
-		b: 23,
-		n: 24,
-		m: 25,
+		z: 20,
+		x: 21,
+		c: 22,
+		v: 23,
+		b: 24,
+		n: 25,
+		m: 26,
 	}
 
+	let gameStatus = "playing"
 	let actualRow = 0
 	let wordToGuess = totalWords[Math.floor(totalWords.length * Math.random())]
-	console.log(wordToGuess)
+
 	let userWord = []
+
+	const restartGame = () => {
+		gameStatus = "playing"
+		actualRow = 0
+		userWord = []
+		wordToGuess = totalWords[Math.floor(totalWords.length * Math.random())]
+		console.log(wordToGuess)
+		modal.classList.remove("open")
+		modal.innerHTML = ""
+		rows.forEach((row) => {
+			for (let i = 0; i < row.children.length; i++) {
+				const cell = row.children[i]
+				cell.setAttribute("status", "empty")
+				cell.textContent = ""
+			}
+		})
+
+		keyboardKeys.forEach((key) => {
+			key.removeAttribute("status")
+		})
+	}
+
+	const openModal = (message) => {
+		const word = wordToGuess.split("")
+		word[0] = word[0].toUpperCase()
+		modal.classList.add("open")
+		modal.innerHTML = `
+			<div>
+				<h2>${message}!</h2>
+				${message == "Perdiste" ? `<p>La palabra era: ${word.join("")}</p>` : ""}
+				<button class="modal__button">Jugar de nuevo</button>
+			</div>
+		`
+
+		modal
+			.querySelector("div > .modal__button")
+			.addEventListener("click", restartGame)
+	}
 
 	const verifyWord = () => {
 		if (userWord.length !== 5 || gameStatus !== "playing") return
+		if (!totalWords.includes(userWord.join(""))) {
+			rows[actualRow].classList.add("shake")
+			setTimeout(() => {
+				rows[actualRow].classList.remove("shake")
+			}, 500)
+			return
+		}
+
+		let results = []
+		let auxWordToGuess = wordToGuess.split("")
+
+		userWord.forEach((letter, index) => {
+			if (letter === auxWordToGuess[index]) {
+				results.push("correct")
+				auxWordToGuess[index] = "-"
+			} else {
+				results.push("wrong")
+			}
+		})
+
+		userWord.forEach((letter, index) => {
+			if (results[index] === "correct") return
+			else if (auxWordToGuess.includes(letter)) {
+				results[index] = "close"
+				auxWordToGuess[auxWordToGuess.indexOf(letter)] = "-"
+			}
+		})
+
 		for (let i = 0; i < 5; i++) {
 			setTimeout(() => {
 				const cell = rows[actualRow].children[i]
-				if (userWord[i] === wordToGuess[i]) {
-					cell.setAttribute("status", "correct")
-				} else if (wordToGuess.includes(userWord[i])) {
-					cell.setAttribute("status", "clue")
-				} else {
-					cell.setAttribute("status", "wrong")
-				}
+				cell.setAttribute("status", results[i])
 			}, i * 500)
 		}
 
 		setTimeout(() => {
 			if (userWord.join("") === wordToGuess) {
-				gameStatus = "win"
+				gameStatus = "end"
+				openModal("Ganaste")
 				return
 			}
 			userWord.forEach((letter, index) => {
 				let key = keyboardKeys[keysPositions[letter]]
 				let keyStatus = key.getAttribute("status")
 				if (!wordToGuess.includes(letter)) {
-					if (keyStatus == "correct" || keyStatus == "clue") return
+					if (keyStatus == "correct" || keyStatus == "close") return
 					key.setAttribute("status", "wrong")
 				} else if (wordToGuess[index] !== letter) {
 					if (keyStatus == "correct") return
-					key.setAttribute("status", "clue")
+					key.setAttribute("status", "close")
 				} else {
 					key.setAttribute("status", "correct")
 					key.classList
@@ -76,7 +139,10 @@
 			})
 			actualRow++
 			userWord.length = 0
-			if (actualRow == 6) gameStatus = "lose"
+			if (actualRow == 6) {
+				gameStatus = "end"
+				openModal("Perdiste")
+			}
 		}, 3500)
 	}
 
